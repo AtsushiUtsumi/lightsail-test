@@ -1,15 +1,4 @@
 services:
-  nginx:
-    container_name: just-live-nginx
-    image: nginx:alpine
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - frontend
-      - backend
-
   backend:
     container_name: just-live-backend
     build: ./backend
@@ -17,35 +6,22 @@ services:
       - "8000"
     volumes:
       - ./backend:/app
-    depends_on:
-      - db
+      - sqlite_data:/app/db
     environment:
-      - DEBUG=${DEBUG:-1}
-      - DATABASE_URL=${DATABASE_URL:-postgresql://user:password@db:5432/just_live_db}
+      - DEBUG=${DEBUG:-0}
+    restart: unless-stopped
 
-  frontend:
-    container_name: just-live-frontend
-    image: node:18-alpine
-    working_dir: /app
-    expose:
-      - "3000"
+  nginx:
+    container_name: just-live-nginx
+    image: nginx:alpine
+    ports:
+      - "80:80"
     volumes:
-      - ./frontend:/app
-    command: sh -c "npm install && npm start"
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./frontend/build:/usr/share/nginx/html
     depends_on:
       - backend
-
-  db:
-    container_name: just-live-db
-    image: postgres:15
-    environment:
-      POSTGRES_DB: just_live_db
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+    restart: unless-stopped
 
 volumes:
-  postgres_data:
+  sqlite_data:

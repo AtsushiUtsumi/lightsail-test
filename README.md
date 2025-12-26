@@ -2,6 +2,15 @@
 
 Lightsailでdocker composeをするテスト用のサンプルアプリケーション
 
+## サーバ
+- AWS lightsail
+- RAM: 512 MB RAM
+- CPU: 2 vCPU
+- ストレージ: 20GB SSD
+
+## ポート
+ポート80でアクセスできるようにすること
+
 ## 構成
 
 - **Nginx**: リバースプロキシ (ポート80)
