@@ -1,11 +1,12 @@
 services:
   backend:
     container_name: just-live-backend
-    build: ./backend
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
     expose:
       - "8000"
     volumes:
-      - ./backend:/app
       - sqlite_data:/app/db
     environment:
       - DEBUG=${DEBUG:-0}

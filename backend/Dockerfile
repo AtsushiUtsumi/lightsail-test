@@ -2,10 +2,13 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY backend/ .
+
+# Reactの静的ファイルをコピー
+COPY frontend/build/static ./staticfiles/
 
 RUN python manage.py collectstatic --noinput
 
