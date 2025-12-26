@@ -50,7 +50,7 @@ lerna-debug.log*
 .pnpm-debug.log*
 
 # Build outputs
-/frontend/build
+# /frontend/build  # 本番デプロイ用にコミット対象
 /frontend/dist
 
 # Testing
