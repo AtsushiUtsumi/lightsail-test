@@ -4,8 +4,9 @@ Lightsailでdocker composeをするテスト用のサンプルアプリケーシ
 
 ## 構成
 
-- **フロントエンド**: React 18 (ポート3000)
-- **バックエンド**: Django 4.2 + Django REST Framework (ポート8000)
+- **Nginx**: リバースプロキシ (ポート80)
+- **フロントエンド**: React 18 (内部ポート3000)
+- **バックエンド**: Django 4.2 + Django REST Framework (内部ポート8000)
 - **データベース**: PostgreSQL 15 (ポート5432)
 
 ## 機能
@@ -30,9 +31,15 @@ docker-compose up -d
 
 ### アクセス方法
 
-- フロントエンド: http://localhost:3000
-- バックエンドAPI: http://localhost:8000/api/todos/
-- Django Admin: http://localhost:8000/admin/
+**ポート80でアクセス（推奨）**
+- アプリケーション: http://localhost/
+- バックエンドAPI: http://localhost/api/todos/
+- Django Admin: http://localhost/admin/
+
+**直接アクセス（開発用）**
+- データベース: localhost:5432
+
+Nginxがリバースプロキシとして動作し、フロントエンド（/）とバックエンド（/api/、/admin/）を1つのポート（80）で提供します。
 
 ### 停止方法
 
@@ -64,10 +71,25 @@ docker-compose down -v
 │   ├── config/          # Django設定
 │   ├── todos/           # Todoアプリ
 │   ├── Dockerfile
+│   ├── entrypoint.sh    # 起動スクリプト
 │   └── requirements.txt
 ├── frontend/            # Reactフロントエンド
 │   ├── public/
 │   ├── src/
 │   └── package.json
+├── nginx/               # Nginxリバースプロキシ
+│   └── nginx.conf       # Nginx設定
 └── docker-compose.yml
+```
+
+## アーキテクチャ
+
+```
+ブラウザ (ポート80)
+    ↓
+Nginx (リバースプロキシ)
+    ├─ / → React (ポート3000)
+    └─ /api/, /admin/ → Django (ポート8000)
+              ↓
+        PostgreSQL (ポート5432)
 ```

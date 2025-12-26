@@ -1,9 +1,20 @@
 services:
+  nginx:
+    container_name: just-live-nginx
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - frontend
+      - backend
+
   backend:
     container_name: just-live-backend
     build: ./backend
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     volumes:
       - ./backend:/app
     depends_on:
@@ -11,12 +22,13 @@ services:
     environment:
       - DEBUG=${DEBUG:-1}
       - DATABASE_URL=${DATABASE_URL:-postgresql://user:password@db:5432/just_live_db}
+
   frontend:
     container_name: just-live-frontend
     image: node:18-alpine
     working_dir: /app
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     volumes:
       - ./frontend:/app
     command: sh -c "npm install && npm start"
