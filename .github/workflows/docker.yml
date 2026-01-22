@@ -26,4 +26,4 @@ jobs:
           context: .
           file: ${{ matrix.service }}/Dockerfile
           push: true
-          tags: ghcr.io/AtsushiUtsumi/lightsail-test:just-live-${{ matrix.service }}
+          tags: ghcr.io/atsushiutsumi/lightsail-test:just-live-${{ matrix.service }}

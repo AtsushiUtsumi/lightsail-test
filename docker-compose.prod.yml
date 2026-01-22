@@ -1,7 +1,7 @@
 services:
   backend:
     container_name: just-live-backend
-    image: ghcr.io/AtsushiUtsumi/lightsail-test:just-live-backend
+    image: ghcr.io/atsushiutsumi/lightsail-test:just-live-backend
     expose:
       - "8000"
     volumes:
@@ -12,7 +12,7 @@ services:
 
   nginx:
     container_name: just-live-nginx
-    image: ghcr.io/AtsushiUtsumi/lightsail-test:just-live-nginx
+    image: ghcr.io/atsushiutsumi/lightsail-test:just-live-nginx
     ports:
       - "80:80"
     depends_on:
