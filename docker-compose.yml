@@ -15,8 +15,8 @@ services:
   frontend:
     container_name: just-live-frontend
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: frontend/Dockerfile
     restart: unless-stopped
 
   nginx:
