@@ -10,13 +10,23 @@ services:
       - DEBUG=${DEBUG:-0}
     restart: unless-stopped
 
+  frontend:
+    container_name: just-live-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+
   nginx:
     container_name: just-live-nginx
-    image: ghcr.io/atsushiutsumi/lightsail-test:just-live-nginx
+    build:
+      context: ./
+      dockerfile: nginx/Dockerfile
     ports:
       - "80:80"
     depends_on:
       - backend
+      - frontend
     restart: unless-stopped
 
 volumes:

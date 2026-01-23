@@ -12,6 +12,13 @@ services:
       - DEBUG=${DEBUG:-0}
     restart: unless-stopped
 
+  frontend:
+    container_name: just-live-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+
   nginx:
     container_name: just-live-nginx
     build:
@@ -21,6 +28,7 @@ services:
       - "80:80"
     depends_on:
       - backend
+      - frontend
     restart: unless-stopped
 
 volumes:
