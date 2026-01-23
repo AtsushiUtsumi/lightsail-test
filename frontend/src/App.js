@@ -75,7 +75,7 @@ function App() {
   return (
     <div className="App">
       <div className="todo-container">
-        <h1>Todo List</h1>
+        <h1>Todoリスト</h1>
 
         {error && <div className="error-message">{error}</div>}
 
