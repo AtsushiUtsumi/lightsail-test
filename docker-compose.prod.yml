@@ -12,9 +12,7 @@ services:
 
   frontend:
     container_name: just-live-frontend
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    image: ghcr.io/atsushiutsumi/lightsail-test:just-live-frontend
     restart: unless-stopped
 
   nginx:
