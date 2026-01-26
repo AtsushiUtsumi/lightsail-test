@@ -17,9 +17,7 @@ services:
 
   nginx:
     container_name: just-live-nginx
-    build:
-      context: ./
-      dockerfile: nginx/Dockerfile
+    image: ghcr.io/atsushiutsumi/lightsail-test:just-live-nginx
     ports:
       - "80:80"
     depends_on:
