@@ -15,13 +15,9 @@ from .authentication import get_player_from_request
 
 class PokerTableViewSet(viewsets.ModelViewSet):
     """ポーカーテーブルViewSet"""
-    queryset = PokerTableModel.objects.none()  # DBアクセス無効化（デバッグ用）
+    queryset = PokerTableModel.objects.all()
     serializer_class = PokerTableSerializer
     permission_classes = [AllowAny]
-
-    def list(self, request, *args, **kwargs):
-        """一覧取得（DBアクセス無効化中）"""
-        return Response({'message': 'DB access disabled for debugging', 'tables': []})
 
     def create(self, request, *args, **kwargs):
         """テーブル作成"""
