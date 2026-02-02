@@ -102,3 +102,14 @@ Nginx (リバースプロキシ)
               ↓
         PostgreSQL (ポート5432)
 ```
+
+# ポーカーAPIでプレイ
+```
+python poker_client.py http://43.206.233.235
+```
+```
+python poker_bot.py http://43.206.233.235 --auto-join 2 --name ボット1 --seat 2
+```
+```
+python poker_bot.py http://43.206.233.235 --auto-join 2 --name ボット2 --seat 3
+```
