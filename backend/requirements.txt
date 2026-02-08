@@ -4,3 +4,4 @@ django-cors-headers==4.3.0
 gunicorn==21.2.0
 whitenoise==6.6.0
 pytest
+poker_domain @ git+https://github.com/AtsushiUtsumi/poker-domain.git
