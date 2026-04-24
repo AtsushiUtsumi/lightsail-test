@@ -32,7 +32,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ steps.registry.outputs.owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GHCR_PAT || secrets.PAT || secrets.GITHUB_TOKEN }}
 
       - name: Build and Push ${{ matrix.service }}
         uses: docker/build-push-action@v5
