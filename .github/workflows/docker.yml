@@ -23,7 +23,7 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: ${{ github.repository_owner }}
+          username: ${{ toLower(github.repository_owner) }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and Push ${{ matrix.service }}
@@ -32,4 +32,4 @@ jobs:
           context: .
           file: ${{ matrix.service }}/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/lightsail-test:just-live-${{ matrix.service }}
+          tags: ghcr.io/${{ toLower(github.repository_owner) }}/lightsail-test:just-live-${{ matrix.service }}
