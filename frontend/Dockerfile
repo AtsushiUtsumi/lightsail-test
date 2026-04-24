@@ -12,6 +12,8 @@ RUN npm run build
 # Production stage
 FROM nginx:alpine
 
+LABEL org.opencontainers.image.source="https://github.com/AtsushiUtsumi/lightsail-test"
+
 COPY --from=build /app/build /usr/share/nginx/html
 
 EXPOSE 80

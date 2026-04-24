@@ -1,5 +1,7 @@
 FROM python:3.11-slim
 
+LABEL org.opencontainers.image.source="https://github.com/AtsushiUtsumi/lightsail-test"
+
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*

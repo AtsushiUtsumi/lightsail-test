@@ -1,5 +1,7 @@
 FROM nginx:alpine
 
+LABEL org.opencontainers.image.source="https://github.com/AtsushiUtsumi/lightsail-test"
+
 # デフォルト設定を削除
 RUN rm /etc/nginx/conf.d/default.conf
 
