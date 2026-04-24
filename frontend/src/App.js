@@ -75,7 +75,7 @@ function App() {
   return (
     <div className="App">
       <div className="todo-container">
-        <h1>久しぶりのデプロイ</h1>
+        <h1>PCから久しぶりのデプロイテスト</h1>
 
         {error && <div className="error-message">{error}</div>}
 
